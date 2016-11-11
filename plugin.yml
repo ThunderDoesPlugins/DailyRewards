@@ -1,0 +1,16 @@
+name: DailyRewards
+version: 1.0.0
+api: [2.0.0]
+author: Thunder33345
+description:
+main: Thunder33345\DailyReward\Loader
+permissions:
+  dailyrewards.manage: #todo
+    default: op
+    description: "Use to manage daily reward admin command(not implimeted yet)"
+  dailyrewards.claim:
+    default: true
+    description: "Use to allow player to claim rewards"
+  dailyrewards.info:
+    default: true
+    description: "Use to allow player to look up claim info"
