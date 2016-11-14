@@ -8,6 +8,7 @@ use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
+use pocketmine\utils\MainLogger;
 use pocketmine\utils\TextFormat;
 use Thunder33345\DailyReward\Commands\ClaimCommand;
 
@@ -37,11 +38,38 @@ class Loader extends PluginBase
       $alias = array_merge($alias, explode(',', $this->getConfig()->get('aliases')));
     $this->getServer()->getCommandMap()->register('dailyclaim', new ClaimCommand($this, 'claim', 'Claim your reward', "/claim", $alias));
     new EventListener($this);
+    $this->scanConfig();
   }
 
   public function onDisable()
   {
 
+  }
+
+  private function scanConfig()
+  {
+    try {
+      $config = $this->getConfig()->getAll();
+      if (!isset($config['unit'])) {
+        throw new \Exception('Config key "unit" is not present');
+      }
+      if (!isset($config['claim-wait'])) {
+        throw new \Exception('Config key "claim-wait" is not present');
+      }
+      if (!isset($config['claim-refresh'])) {
+        throw new \Exception('Config key "claim-refresh" is not present');
+      }
+      if (!isset($config['rewards'])) {
+        throw new \Exception('Config key "rewards" is not present');
+      }
+      if (!isset($config['rewards'][1])) {
+        throw new \Exception('Config key "rewards" - "1" is not present');
+      }
+    } catch (\Exception$exception) {
+      MainLogger::getLogger()->error($exception->getMessage());
+      MainLogger::getLogger()->notice("Halting because of invalid config...");
+      $this->getPluginLoader()->disablePlugin($this);
+    }
   }
 
   public function onClaimCommand(CommandSender $sender, $commandLabel, array $args)
