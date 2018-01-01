@@ -29,7 +29,7 @@ abstract class BaseCommand extends Command implements PluginIdentifiableCommand 
 	/**
 	 * @return Plugin
 	 */
-	public function getPlugin() {
+	public function getPlugin():Plugin {
 		return $this->plugin;
 	}
 
@@ -40,7 +40,7 @@ abstract class BaseCommand extends Command implements PluginIdentifiableCommand 
 	 *
 	 * @return bool
 	 */
-	public function execute(CommandSender $sender, $commandLabel, array $args) {
+	public function execute(CommandSender $sender, string $commandLabel, array $args):bool {
 		return $this->onCommand($sender,$commandLabel, $args);
 	}
 
@@ -51,6 +51,6 @@ abstract class BaseCommand extends Command implements PluginIdentifiableCommand 
 	 *
 	 * @return bool
 	 */
-	public abstract function onCommand(CommandSender $sender,$commandLabel, array $args);
+	public abstract function onCommand(CommandSender $sender,string $commandLabel, array $args):bool;
 
 }

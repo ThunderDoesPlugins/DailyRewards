@@ -72,7 +72,7 @@ class Loader extends PluginBase
     }
   }
 
-  public function onClaimCommand(CommandSender $sender, $commandLabel, array $args)
+  public function onClaimCommand(CommandSender $sender, string $commandLabel, array $args)
   {
     if (!isset($args[0])) {
       if ($sender->hasPermission('dailyrewards.claim') AND $this->canClaim($sender->getName())) $args[0] = 'claim';
@@ -148,13 +148,14 @@ class Loader extends PluginBase
     }
   }
 
+  /*
   public function onAdminCommand(CommandSender $sender, $commandLabel, array $args) //todo in future
   {
     if (empty($args[0]) or !isset($args[0])) $args[0] = 'help';
     switch (strtolower($args[0])) {
 
     }
-  }
+  }*/
 
   public function onJoin(Player $player)
   {
@@ -281,7 +282,7 @@ class Loader extends PluginBase
     }
   }
 
-  private function config()
+  /*private function config()
   {
     $config = [
       "aliases" => "",
@@ -299,7 +300,7 @@ class Loader extends PluginBase
         ],
       ]
     ];
-  }
+  }*/
 
   private function getClaimTime($user):int
   {

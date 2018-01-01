@@ -16,8 +16,9 @@ class ClaimCommand extends BaseCommand
     $this->loader = $plugin;
   }
 
-  public function onCommand(CommandSender $sender, $commandLabel, array $args)
+  public function onCommand(CommandSender $sender,string $commandLabel, array $args):bool
   {
     $this->loader->onClaimCommand($sender,$commandLabel,$args);
+    return true;
   }
 }
