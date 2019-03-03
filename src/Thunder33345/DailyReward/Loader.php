@@ -87,7 +87,7 @@ class Loader extends PluginBase
     }
   }
 
-  public function onClaimCommand(CommandSender $sender, string $commandLabel, array $args)
+  public function onClaimCommand(CommandSender $sender, string $commandLabel, array $args) : bool
   {
     if (!isset($args[0])) {
       if ($sender->hasPermission('dailyrewards.claim') AND $this->canClaim($sender->getName())) $args[0] = 'claim';
